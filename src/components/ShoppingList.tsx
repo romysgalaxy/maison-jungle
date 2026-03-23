@@ -1,19 +1,20 @@
 import { useState } from 'react'
 import { plantList } from '../datas/plantList'
+import type { Plant } from '../types'
 import PlantItem from './ui/PlantItem'
 import Categories from './Categories'
 import '../styles/ShoppingList.css'
 
-function ShoppingList({ addToCart }) {
+function ShoppingList({ addToCart }: { addToCart: (plant: Plant) => void }) {
 	const [activeCategory, setActiveCategory] = useState('')
-	const categories = plantList.reduce(
+	const categories = plantList.reduce<string[]>(
 		(acc, plant) =>
 			acc.includes(plant.category) ? acc : acc.concat(plant.category),
 		[]
 	)
 
-	const handleAddToCart = (name, price) => {
-		addToCart({ name, price })
+	const handleAddToCart = (name: string, price: number) => {
+		addToCart({ name, price } as Plant)
 	}
 
 	return (

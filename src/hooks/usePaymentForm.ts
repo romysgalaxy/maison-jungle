@@ -1,15 +1,16 @@
 import { useState } from "react";
+import type { PaymentFormData, FormErrors } from "../types";
 
 export const usePaymentForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PaymentFormData>({
     cardNumber: "",
     expiryDate: "",
     cvv: "",
     cardholderName: "",
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
-  const updateField = (name, value) => {
+  const updateField = (name: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -24,7 +25,7 @@ export const usePaymentForm = () => {
     }
   };
 
-  const validateField = (name, value) => {
+  const validateField = (name: string, value: string): string | null => {
     switch (name) {
       case "cardNumber": {
         const cleanCardNumber = value.replace(/\s/g, "");
@@ -40,7 +41,7 @@ export const usePaymentForm = () => {
         }
         const [month, year] = value.split("/");
         const currentDate = new Date();
-        const expiryDate = new Date(2000 + parseInt(year), parseInt(month) - 1);
+        const expiryDate = new Date(2000 + parseInt(year!), parseInt(month!) - 1);
         if (expiryDate < currentDate) {
           return "Carte expirée";
         }
@@ -69,11 +70,11 @@ export const usePaymentForm = () => {
   };
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: FormErrors = {};
     let isValid = true;
 
     Object.keys(formData).forEach((fieldName) => {
-      const error = validateField(fieldName, formData[fieldName]);
+      const error = validateField(fieldName, formData[fieldName as keyof PaymentFormData]);
       if (error) {
         newErrors[fieldName] = error;
         isValid = false;
@@ -84,11 +85,11 @@ export const usePaymentForm = () => {
     return isValid;
   };
 
-  const formatCardNumber = (value) => {
+  const formatCardNumber = (value: string) => {
     const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
     const matches = v.match(/\d{4,16}/g);
     const match = (matches && matches[0]) || "";
-    const parts = [];
+    const parts: string[] = [];
     for (let i = 0, len = match.length; i < len; i += 4) {
       parts.push(match.substring(i, i + 4));
     }
@@ -99,7 +100,7 @@ export const usePaymentForm = () => {
     }
   };
 
-  const formatExpiryDate = (value) => {
+  const formatExpiryDate = (value: string) => {
     const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
     if (v.length >= 2) {
       return v.substring(0, 2) + "/" + v.substring(2, 4);

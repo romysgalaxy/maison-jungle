@@ -1,6 +1,7 @@
+import type { CategoriesProps } from '../types'
 import '../styles/Categories.css'
 
-function Categories({ setActiveCategory, categories, activeCategory }) {
+function Categories({ setActiveCategory, categories, activeCategory }: CategoriesProps) {
 	return (
 		<div className='lmj-categories'>
 			<div className='lmj-categories-tags'>

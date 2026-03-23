@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
+import type { CartItem } from '../../types'
 import '../../styles/Banner.css'
 import logo from '../../assets/logo.png'
 
-function Banner({ cart }) {
-	const totalItems = cart ? cart.reduce((acc, item) => acc + item.amount, 0) : 0
+function Banner({ cart }: { cart: CartItem[] }) {
+	const totalItems = cart.reduce((acc, item) => acc + item.amount, 0)
 
 	return (
 		<div className='lmj-banner'>
