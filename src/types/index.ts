@@ -70,8 +70,16 @@ export type PaymentFormProps = {
   onCancel: () => void;
 };
 
+export type HomePageProps = {
+  addToCart: (plant: Plant) => void;
+};
+
 export type CartPageProps = {
   cart: CartItem[];
   clearCart: () => void;
   updateQuantity: (plantName: string, newAmount: number) => void;
+};
+
+export type PlantDetailPageProps = {
+  addToCart: (plant: Plant) => void;
 };

@@ -1,7 +1,18 @@
 import { useState, useEffect } from "react";
 import type { CartItem, Plant } from "../types";
 
-export const useCart = () => {
+type UseCartReturn = {
+  cart: CartItem[];
+  addToCart: (plant: Plant) => void;
+  removeFromCart: (plantName: string) => void;
+  updateQuantity: (plantName: string, newAmount: number) => void;
+  clearCart: () => void;
+  getTotal: () => number;
+  getItemCount: () => number;
+  getCartItem: (plantName: string) => CartItem | undefined;
+};
+
+export const useCart = (): UseCartReturn => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   // Charger le panier depuis localStorage au montage

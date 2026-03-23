@@ -2,7 +2,16 @@ import { useState } from "react";
 import { PaymentService } from "../services/paymentService";
 import type { PaymentData, PaymentResult } from "../types";
 
-export const usePayment = () => {
+type UsePaymentReturn = {
+  isProcessing: boolean;
+  error: string | null;
+  success: boolean;
+  transactionResult: PaymentResult | null;
+  processPayment: (paymentData: PaymentData) => Promise<PaymentResult>;
+  resetPayment: () => void;
+};
+
+export const usePayment = (): UsePaymentReturn => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);

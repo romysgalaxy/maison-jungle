@@ -1,7 +1,18 @@
 import { useState } from "react";
 import type { PaymentFormData, FormErrors } from "../types";
 
-export const usePaymentForm = () => {
+type UsePaymentFormReturn = {
+  formData: PaymentFormData;
+  errors: FormErrors;
+  updateField: (name: string, value: string) => void;
+  validateField: (name: string, value: string) => string | null;
+  validateForm: () => boolean;
+  formatCardNumber: (value: string) => string;
+  formatExpiryDate: (value: string) => string;
+  resetForm: () => void;
+};
+
+export const usePaymentForm = (): UsePaymentFormReturn => {
   const [formData, setFormData] = useState<PaymentFormData>({
     cardNumber: "",
     expiryDate: "",

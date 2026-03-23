@@ -1,10 +1,10 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { plantList } from '../datas/plantList'
-import type { Plant } from '../types'
+import type { PlantDetailPageProps } from '../types'
 import CareScale from '../components/ui/CareScale'
 import '../styles/PlantDetailPage.css'
 
-function PlantDetailPage({ addToCart }: { addToCart: (plant: Plant) => void }) {
+function PlantDetailPage({ addToCart }: PlantDetailPageProps) {
 	const { id } = useParams()
 	const navigate = useNavigate()
 	
