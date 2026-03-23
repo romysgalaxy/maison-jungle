@@ -3,7 +3,7 @@ import { plantList } from '../datas/plantList'
 import CareScale from '../components/ui/CareScale'
 import '../styles/PlantDetailPage.css'
 
-function PlantDetailPage({ cart, addToCart }) {
+function PlantDetailPage({ addToCart }) {
 	const { id } = useParams()
 	const navigate = useNavigate()
 	

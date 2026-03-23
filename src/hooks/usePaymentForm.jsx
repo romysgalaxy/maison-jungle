@@ -26,18 +26,18 @@ export const usePaymentForm = () => {
 
   const validateField = (name, value) => {
     switch (name) {
-      case "cardNumber":
+      case "cardNumber": {
         const cleanCardNumber = value.replace(/\s/g, "");
         if (!cleanCardNumber.match(/^\d{13,19}$/)) {
           return "Numéro de carte invalide";
         }
         break;
+      }
 
-      case "expiryDate":
+      case "expiryDate": {
         if (!value.match(/^\d{2}\/\d{2}$/)) {
           return "Format de date invalide (MM/AA)";
         }
-        // Validation de la date d'expiration
         const [month, year] = value.split("/");
         const currentDate = new Date();
         const expiryDate = new Date(2000 + parseInt(year), parseInt(month) - 1);
@@ -45,6 +45,7 @@ export const usePaymentForm = () => {
           return "Carte expirée";
         }
         break;
+      }
 
       case "cvv":
         if (!value.match(/^\d{3,4}$/)) {

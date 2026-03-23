@@ -4,7 +4,7 @@ import PlantItem from './ui/PlantItem'
 import Categories from './Categories'
 import '../styles/ShoppingList.css'
 
-function ShoppingList({ cart, addToCart }) {
+function ShoppingList({ addToCart }) {
 	const [activeCategory, setActiveCategory] = useState('')
 	const categories = plantList.reduce(
 		(acc, plant) =>

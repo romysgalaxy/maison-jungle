@@ -10,8 +10,7 @@ function PaymentForm({ amount, onSuccess, onCancel }) {
     updateField, 
     validateForm, 
     formatCardNumber, 
-    formatExpiryDate,
-    resetForm 
+    formatExpiryDate
   } = usePaymentForm()
 
   const handleInputChange = (e) => {
